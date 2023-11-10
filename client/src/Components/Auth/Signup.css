@@ -1,0 +1,68 @@
+:root {
+  --PrimaryColor: hsl(199, 100%, 33%);
+  --SecondaryColor: hsl(187, 85%, 43%);
+  --gradientColor: linear-gradient(to right, hsl(187,85%, 43%)), hsl(199,100%,33%);
+  --whiteColor: hsl(0,0%,100%);
+  --blackColor: hsl(201, 33%, 16%);
+  --textColor: hsl(240, 4%, 36%);
+  --whiteColorDeam: hsl(0,0%,93%);
+  --greyText: rgb(190, 190, 190);
+  --inputColor: rgb(239, 239, 239);
+  --bodyColor: rgb(240,240,246);
+  --cardBG: rgb(225, 225, 235);
+ }
+
+
+ .signup-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh; /* Ensure the container takes at least the full height of the viewport */
+  background-color: var(--bodyColor); /* Add your preferred background color */
+}
+
+.signup-container {
+  max-width: 400px;
+  margin: 20px auto; /* Adjust the top and bottom margin as needed */
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  background-color: var(--whiteColor); /* Add your preferred background color */
+}
+  
+  .signup-heading {
+    margin-bottom: 15px;
+  }
+  
+  .signup-label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+  }
+  
+  .signup-input {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  .signup-button {
+    background-color: var(--PrimaryColor);
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-bottom: 20px;
+  }
+  
+  .signup-button:hover {
+    background-color: var(--SecondaryColor);
+  }
+
+  .error-message {
+    color: red;
+  }
+  
