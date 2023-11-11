@@ -1,4 +1,4 @@
-const User = require('../Model/userModel'); // Your model file
+const User = require('../Models/userModel'); // Your model file
 
 const UserController = {
   register: async (req, res) => {

@@ -19,23 +19,29 @@ mongoose.connect('mongodb+srv://ZeroWaste:Hacc2023@zerowaste.yzx5dla.mongodb.net
 
 // Define user schema and model
 const userSchema = new mongoose.Schema({
+  name: String,
   email: String,
   password: String,
+  containers: Number,
+  points: Number,
 });
 
 const User = mongoose.model('User', userSchema);
 
 // Register endpoint
 app.post('/api/register', async (req, res) => {
-  const { email, password } = req.body;
+  const { name, email, password, containers } = req.body;
 
   // Hash the password (in a real-world scenario, you should use bcrypt)
   const hashedPassword = await bcrypt.hash(password, 10);
 
   // Save the user to the database
   const user = new User({
+    name,
     email,
     password: hashedPassword,
+    containers: 0,
+    points: 0,
   });
 
   try {
@@ -67,6 +73,51 @@ app.post('/api/login', async (req, res) => {
     }
   } else {
     res.status(401).send('User not found.');
+  }
+});
+
+// Search users endpoint
+app.get('/api/user/search/:email', async (req, res) => {
+  const { email } = req.params;
+
+  try {
+    // Search for users with a matching email
+    const searchResults = await User.find({ email });
+
+    res.status(200).json(searchResults);
+  } catch (error) {
+    console.error('Error searching for users:', error);
+    res.status(500).send('Error searching for users.');
+  }
+});
+
+// Update containers endpoint
+app.put('/api/user/update/:id', async (req, res) => {
+  const { id } = req.params;
+  const { containers } = req.body;
+
+  try {
+    // Find the user by ID and update the containers field
+    const updatedUser = await User.findByIdAndUpdate(id, { containers }, { new: true });
+
+    if (updatedUser) {
+      res.status(200).json(updatedUser);
+    } else {
+      res.status(404).send('User not found.');
+    }
+
+    // If containers is zero, calculate points and update the points field
+    if (containers === 0) {
+      const points = 5; // Adjust the calculation based on your logic
+      updatedUser.points += points;
+    }
+
+    // Save the updated user (this line saves the changes to the database)
+    await updatedUser.save();
+
+  } catch (error) {
+    console.error('Error updating containers:', error);
+    res.status(500).send('Error updating containers.');
   }
 });
 

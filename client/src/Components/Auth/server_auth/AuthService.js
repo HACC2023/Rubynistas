@@ -13,9 +13,9 @@ const AuthService = {
     }
   },
 
-  login: async (name, email, password) => {
+  login: async (email, password) => {
     try {
-      const response = await axios.post(`${API_URL}/login`, { name, email, password });
+      const response = await axios.post(`${API_URL}/login`, {email, password });
       const { token } = response.data;
       localStorage.setItem('token', token);
       return true;

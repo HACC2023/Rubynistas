@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import {Link} from 'react-router-dom';
 import './navbar.css';
 import {GiWaveSurfer} from 'react-icons/gi';
-import {Button} from '../Buttons/Button';
+//import {Button} from '../Buttons/Button';
 
 function Navbar() {
   const [click, setClick] = useState(false);
@@ -47,8 +47,13 @@ function Navbar() {
                 </Link>
               </li>
               <li className='nav-item'>
+                <Link to='/vender' className='nav-links' onClick={closeMobileMenu}>
+                  Venders Login
+                </Link>
+              </li>
+              <li className='nav-item'>
                 <Link to='/login' className='nav-links' onClick={closeMobileMenu}>
-                  Login
+                  Customer Login
                 </Link>
               </li>
               <li className='nav-item'>
