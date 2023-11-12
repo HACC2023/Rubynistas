@@ -1,6 +1,6 @@
 import React from 'react';
 import '../../App.css';
-import {Button} from '../Buttons/Button';
+import {Button} from './Buttons/Button';
 import './HeroSection.css';
 //import { Link } from 'react-router-dom'; // Import Link from react-router-dom
 
@@ -11,22 +11,13 @@ function HeroSection() {
       <h1>Zero Waste <br/> Reuseable Containers</h1>
       <p>What are you waiting for?</p>
       <div className='hero-btns'>
-      <a href='/login' className='btns'>
-          <Button
-            className='btns'
-            buttonStyle='btn--outline'
-            buttonSize='btn--large'
-          >
-            GET STARTED
-          </Button>
-        </a>
         <Button
           className='btns'
           buttonStyle='btn--primary'
           buttonSize='btn--large'
     
         >
-          WATCH TRAILER <i className='far fa-play-circle' />
+          GET STARTED <i className='far fa-play-circle' />
         </Button>
       </div>
     </div>

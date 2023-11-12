@@ -11,6 +11,7 @@ import Footer from './Components/Footer/Footer';
 import Vlogin from './Components/Auth/vender_auth/Vlogin';
 import Vsignup from './Components/Auth/vender_auth/Vsignup';
 import About from './Components/About/About';
+import Navbar2 from './Components/Main/MainNavbar/Navbar2';
 
 
 
@@ -26,7 +27,7 @@ function App() {
           <Route path="/vlogin" element={<><Navbar /><Vlogin /></>} />
           <Route path="/vsignup" element={<><Navbar /><Vsignup /></>} />
           {/* Exclude Navbar / Search on /main route */}
-          <Route path="/main" element={<MainPage />} />
+          <Route path="/main" element={<><Navbar2 /><MainPage /></>} />
           <Route path="/search" exact Component={Search} />
           <Route path="/about-us" exact Component={About} />
         </Routes>

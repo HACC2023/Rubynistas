@@ -28,6 +28,7 @@
     border: 1px solid var(--primary);
 }
 
+
 .btn--outline{
     background-color: transparent;
     color: #fff;
@@ -57,7 +58,7 @@
 
 .btn--medium:hover,
 .btn--large:hover{
-    background: #fff;
+    background: #ddf0f5;
     color: #242424;
     transition: all 0.3s ease-out;
 }

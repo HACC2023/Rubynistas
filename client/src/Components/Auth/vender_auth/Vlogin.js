@@ -7,7 +7,7 @@ const Vlogin = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
-  const [error, setError] = useState('');
+  const [error] = useState('');
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -34,6 +34,7 @@ const Vlogin = () => {
     <div className="login-wrapper">
     <div className="login-container">
     <h1> VENDERS </h1>
+    <br/>
     <br/>
     <br/>
       <h2 className="login-heading">Login</h2>

@@ -6,6 +6,8 @@ const cors = require('cors');
 const userRoutes = require('./Routes/userRoutes'); // Your route file
 
 
+
+
 const app = express();
 const PORT = 3001;
 
@@ -76,6 +78,18 @@ app.post('/api/login', async (req, res) => {
   }
 });
 
+// Logout endpoint
+app.post('/api/logout', (req, res) => {
+  // You may want to add additional cleanup logic here.
+  
+  // If you're using JWT, you could provide a new token to the client to replace the old one.
+  // This effectively invalidates the old token.
+  const newToken = jwt.sign({ userId: null }, 'your_secret_key', { expiresIn: 0 });
+
+  res.status(200).json({ token: newToken, message: 'Logout successful.' });
+});
+
+
 // Search users endpoint
 app.get('/api/user/search/:email', async (req, res) => {
   const { email } = req.params;
@@ -119,6 +133,25 @@ app.put('/api/user/update/:id', async (req, res) => {
     console.error('Error updating containers:', error);
     res.status(500).send('Error updating containers.');
   }
+});
+
+// Define a route to handle the PUT request for updating user points
+app.put('/api/user/update/:userId', (req, res) => {
+  const { id } = req.params.userId;
+  const { points } = req.body;
+
+  // Find the user in the mock data
+  const user = users.find((u) => u.id === parseInt(id));
+
+  if (!user) {
+    return res.status(404).json({ error: 'User not found' });
+  }
+
+  // Update the user's points
+  user.points = points;
+
+  // Send a success response
+  res.status(200).json({ message: 'Points updated successfully', user });
 });
 
 app.listen(PORT, () => {

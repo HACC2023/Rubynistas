@@ -69,7 +69,7 @@ const Login = () => {
         </p>
         <br/>
         <p>
-          Are you a vender? <a href="/vsignup" className="signup-link-text">Sign Up</a>
+          Are you a vender? <a href="/vlogin" className="signup-link-text">Login</a>
         </p>
       </div>
     </div>

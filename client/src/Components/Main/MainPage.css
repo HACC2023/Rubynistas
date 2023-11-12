@@ -1,19 +1,14 @@
-
-.center-container {
+.center-container2 {
+  /* Center the content in the container */
   display: flex;
-  align-items: center;
   justify-content: center;
+  align-items: center;
   height: 100vh;
 }
 
 .main-wrapper {
-  max-width: 800px;
-  margin: 0 auto;
-  padding: 80px;
-  justify-content: center;
-  border: 1px solid #ccc; /* Add a border for better visibility */
-  border-radius: 2rem;
-  border-color: none;
+  /* Additional styling for the main content */
+  width: 80%; /* Adjust the width as needed */
 }
 
 .main-title {

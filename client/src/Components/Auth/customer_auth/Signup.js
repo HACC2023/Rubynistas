@@ -7,7 +7,7 @@ const Signup = () => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [error, setError] = useState(null); // Add state for error
+  //const [error, setError] = useState(null); // Add state for error
   const navigate = useNavigate();
 
   const handleSignUp = async (e) => {
