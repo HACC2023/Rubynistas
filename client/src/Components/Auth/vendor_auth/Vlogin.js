@@ -7,33 +7,36 @@ const Vlogin = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
-  const [error] = useState('');
 
   const handleLogin = async (e) => {
     e.preventDefault();
-
+  
     if (email.trim() === '' || password.trim() === '') {
       // If either email or password is empty, set an error state
       alert('Please enter both email and password.');
       return;
     }
-
+  
     const success = await AuthService.login(email, password);
-
+  
     if (success) {
-      navigate('/search');
+      const userRole = await AuthService.getRole(email);
+  
+      if (userRole === 'vendor') {
+        navigate('/search');
+      } else {
+        alert('You do not have the required role to log in.');
+      }
     } else {
       // Handle login failure, show an error message, etc.
       alert('Invalid email or password. Please try again.');
     }
-
-    console.log('Error:', error);
   };
 
   return (
     <div className="login-wrapper">
     <div className="login-container">
-    <h1> VENDERS </h1>
+    <h1> VENDORS </h1>
     <br/>
     <br/>
     <br/>

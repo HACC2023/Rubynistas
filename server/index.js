@@ -4,8 +4,7 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const cors = require('cors');
 const userRoutes = require('./Routes/userRoutes'); // Your route file
-
-
+const sendPaymentEmail = require('./sendPaymentEmail'); 
 
 
 const app = express();
@@ -19,6 +18,11 @@ app.use('/api/users', userRoutes); // Use your user routes
 // Connect to MongoDB Atlas
 mongoose.connect('mongodb+srv://ZeroWaste:Hacc2023@zerowaste.yzx5dla.mongodb.net/?retryWrites=true&w=majority', { useNewUrlParser: true, useUnifiedTopology: true });
 
+// Import the SendGrid library and set API key
+const sgMail = require('@sendgrid/mail');
+sgMail.setApiKey('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');
+
+
 // Define user schema and model
 const userSchema = new mongoose.Schema({
   name: String,
@@ -26,9 +30,33 @@ const userSchema = new mongoose.Schema({
   password: String,
   containers: Number,
   points: Number,
+  lastCheckout: Date,
 });
 
 const User = mongoose.model('User', userSchema);
+
+
+
+// Modify the server route
+app.get('/api/user/main/:email', async (req, res) => {
+  const { email } = req.params;
+  console.log('Email parameter:', email);
+
+  try {
+    const userData = await User.findOne({ email });
+
+    if (userData) {
+      res.status(200).json(userData);
+    } else {
+      res.status(404).send('User not found.');
+    }
+  } catch (error) {
+    console.error('Error fetching user data:', error);
+    res.status(500).send('Error fetching user data.');
+  }
+});
+
+
 
 // Register endpoint
 app.post('/api/register', async (req, res) => {
@@ -105,30 +133,40 @@ app.get('/api/user/search/:email', async (req, res) => {
   }
 });
 
+
 // Update containers endpoint
 app.put('/api/user/update/:id', async (req, res) => {
   const { id } = req.params;
   const { containers } = req.body;
 
   try {
-    // Find the user by ID and update the containers field
-    const updatedUser = await User.findByIdAndUpdate(id, { containers }, { new: true });
-
+    const updatedUser = await User.findByIdAndUpdate(id, { containers, lastCheckout: new Date() }, { new: true });
+//
     if (updatedUser) {
+      // If containers is zero, calculate points and update the points field
+      if (containers === 0) {
+        const points = 5; // Adjust the calculation based on your logic
+        updatedUser.points += points;
+
+        // Save the updated user (this line saves the changes to the database)
+        await updatedUser.save();
+
+        // Simulate sending an email 24 hours in the future
+        setTimeout(async () => {
+          const fetchedUser = await User.findById(id);
+          if (fetchedUser) {
+            sendPaymentEmail(fetchedUser.email, 'Your payment is due!');
+          } else {
+            console.error('User not found for email sending');
+          }
+        }, 24 * 60 * 60 * 1000); // 24 hours in milliseconds
+        
+      }
+
       res.status(200).json(updatedUser);
     } else {
       res.status(404).send('User not found.');
     }
-
-    // If containers is zero, calculate points and update the points field
-    if (containers === 0) {
-      const points = 5; // Adjust the calculation based on your logic
-      updatedUser.points += points;
-    }
-
-    // Save the updated user (this line saves the changes to the database)
-    await updatedUser.save();
-
   } catch (error) {
     console.error('Error updating containers:', error);
     res.status(500).send('Error updating containers.');
@@ -152,6 +190,28 @@ app.put('/api/user/update/:userId', (req, res) => {
 
   // Send a success response
   res.status(200).json({ message: 'Points updated successfully', user });
+});
+
+// Additional endpoint to manually trigger email sending
+app.post('/api/send-email/:userId', async (req, res) => {
+  const { userId } = req.params;
+
+  try {
+    // Retrieve the user by ID from the database
+    const user = await User.findById(userId);
+
+    if (user) {
+      // Simulate the scenario where an email needs to be sent
+      sendPaymentEmail(user.email, 'Manually triggered payment email');
+
+      res.status(200).send('Email sent successfully.');
+    } else {
+      res.status(404).send('User not found.');
+    }
+  } catch (error) {
+    console.error('Error sending email:', error);
+    res.status(500).send('Error sending email.');
+  }
 });
 
 app.listen(PORT, () => {

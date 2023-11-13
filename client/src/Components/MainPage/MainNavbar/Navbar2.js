@@ -75,7 +75,7 @@ function Navbar2() {
               </li>
             </ul>
             {button && (
-            <button className="logout2" onClick={handleLogout}>Logout</button>
+            <button to='/login' className="logout2" onClick={handleLogout}>Logout</button>
           )}
         </div>
     </nav>
