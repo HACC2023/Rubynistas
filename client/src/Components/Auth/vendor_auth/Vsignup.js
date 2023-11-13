@@ -23,6 +23,7 @@ const Vsignup = () => {
     const success = await AuthService.register(name, email, password, 'vendor');
 
     if (success) {
+      alert('Account has been successfully created. Please login.');
       navigate('/vlogin');
     } else {
       alert('Email is already in use. Please use a different email.');

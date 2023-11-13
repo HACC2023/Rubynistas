@@ -6,6 +6,7 @@ import './Login.css';
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [loading, setLoading] = useState(false); // New state for loading
   const navigate = useNavigate();
   const [error] = useState('');
 
@@ -18,7 +19,13 @@ const Login = () => {
       return;
     }
 
+    // Set loading state to true when starting login
+    setLoading(true);
+
     const success = await AuthService.login(email, password);
+
+    // Reset loading state when login process is complete
+    setLoading(false);
 
     if (success) {
       // Save the email to local storage
@@ -62,8 +69,8 @@ const Login = () => {
             />
           </label>
           <br />
-          <button type="submit" className="login-button">
-            Login
+          <button type="submit" className="login-button" disabled={loading}>
+          {loading ? 'Please wait...' : 'Login'}
           </button>
         </form>
         <div className="signup-link">

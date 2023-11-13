@@ -21,8 +21,9 @@ const Signup = () => {
       const success = await AuthService.register(name, email, password, 'customer');
   
       if (success) {
+        alert('Account has been successfully created. Please login.');
         // Redirect to the main page and pass the user's name
-        navigate('/main', { state: { username: name } });
+        navigate('/login', { state: { username: name } });
       } else {
         alert('Email is already in use. Please use a different email.');
       }
