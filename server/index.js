@@ -30,6 +30,29 @@ const userSchema = new mongoose.Schema({
 
 const User = mongoose.model('User', userSchema);
 
+
+// Modify the server route
+// Modify the server route
+app.get('/api/user/main/:email', async (req, res) => {
+  const { email } = req.params;
+  console.log('Email parameter:', email);
+
+  try {
+    const userData = await User.findOne({ email });
+
+    if (userData) {
+      res.status(200).json(userData);
+    } else {
+      res.status(404).send('User not found.');
+    }
+  } catch (error) {
+    console.error('Error fetching user data:', error);
+    res.status(500).send('Error fetching user data.');
+  }
+});
+
+
+
 // Register endpoint
 app.post('/api/register', async (req, res) => {
   const { name, email, password, containers } = req.body;

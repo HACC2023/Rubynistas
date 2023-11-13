@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
-import './MainPage.css'; // Import the CSS file
-import axios from 'axios'; // Import Axios for making HTTP requests
+import React, { useState, useEffect } from 'react';
+import './MainPage.css';
+import axios from 'axios';
 
-const RewardCard = ({ containerCount, reward }) => {
+const RewardCard = ({ containerCount, reward, userData }) => {
   const incentiveOptions = [
     { points: 25, incentive: '5% discount on next meal' },
     { points: 50, incentive: 'Free drink with your next purchase' },
@@ -34,27 +34,50 @@ const RewardCard = ({ containerCount, reward }) => {
   );
 };
 
-
 const MainPage = () => {
-  const [returnedContainers, setReturnedContainers] = useState(0);
+  const [containers, setReturnedContainers] = useState(0);
   const [points, setPoints] = useState(0);
-
+  const [userEmail, setUserEmail] = useState('');
+  const [userData, setUserData] = useState(null);
+  const [name, setUserName] = useState('');
 
   const rewardCards = [
     { containerCount: 1, reward: 5 },
     { containerCount: 5, reward: 10 },
     { containerCount: 10, reward: 15 },
-    // Add more reward cards as needed
   ];
 
+  useEffect(() => {
+    // Retrieve the email from local storage
+    const savedEmail = localStorage.getItem('userEmail');
+    setUserEmail(savedEmail);
+
+    const fetchData = async () => {
+      try {
+        if (savedEmail) {
+          const response = await axios.get(`http://localhost:3001/api/user/main/${savedEmail}`);
+          const userData = response.data;
+          setUserName(userData.name);
+          setUserData(userData);
+          setReturnedContainers(userData.containers);
+          setPoints(userData.points);
+        }
+      } catch (error) {
+        console.error('Error fetching user data:', error);
+      }
+    };
+  
+    fetchData();
+  }, []);
+  
 
   return (
     <div className="center-container2">
       <div className="main-wrapper">
-        <h1 className="main-title">Welcome, </h1>
-        <h2 className="main-title"> Your Rewards Status </h2>
+        <h1 className="main-title">Welcome, {name}</h1>
+        <h2 className="main-title">Your Rewards Status</h2>
         <div>
-          <p>Returned Containers: {returnedContainers}</p>
+          <p>Current Container Amount: {containers}</p>
           <p>Points: {points}</p>
           <br />
         </div>
@@ -65,6 +88,7 @@ const MainPage = () => {
               key={index}
               containerCount={card.containerCount}
               reward={card.reward}
+              userData={userData}
             />
           ))}
         </div>
@@ -75,4 +99,3 @@ const MainPage = () => {
 };
 
 export default MainPage;
-
