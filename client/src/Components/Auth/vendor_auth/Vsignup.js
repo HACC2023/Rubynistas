@@ -20,7 +20,7 @@ const Vsignup = () => {
       return;
     }
 
-    const success = await AuthService.register(name, email, password);
+    const success = await AuthService.register(name, email, password, 'vendor');
 
     if (success) {
       navigate('/vlogin');
@@ -32,7 +32,7 @@ const Vsignup = () => {
   return (
     <div className="signup-wrapper">
     <div className="signup-container">
-    <h1> VENDERS </h1>
+    <h1> VENDORS </h1>
     <br/>
     <br/>
       <h2 className="signup-heading">Sign Up</h2>

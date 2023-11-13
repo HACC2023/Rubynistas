@@ -1,35 +1,33 @@
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
-const User = require('../Models/userModel'); // Your model file
+const Vendor = require('../Models/vendorModel'); // Update the model file import
 
-const UserController = {
+const VendorsController = {
   register: async (req, res) => {
     const { name, email, password, role } = req.body;
 
     try {
-      // Check if the user already exists
-      const existingUser = await User.findOne({ email });
-      if (existingUser) {
-        return res.status(400).json({ message: 'User already exists' });
+      // Check if the vendor already exists
+      const existingVendor = await Vendor.findOne({ email });
+      if (existingVendor) {
+        return res.status(400).json({ message: 'Vendor already exists' });
       }
 
       // Hash the password
       const hashedPassword = await bcrypt.hash(password, 10);
 
-      // Create a new user
-      const newUser = new User({
+      // Create a new vendor
+      const newVendor = new Vendor({
         name,
         email,
         password: hashedPassword,
-        containers: 0,
-        points: 0,
         role,
       });
 
-      // Save the user to the database
-      await newUser.save();
+      // Save the vendor to the database
+      await newVendor.save();
 
-      res.status(201).json({ message: 'User registered successfully' });
+      res.status(201).json({ message: 'Vendor registered successfully' });
     } catch (error) {
       console.error('Registration error:', error);
       res.status(500).json({ message: 'Internal server error' });
@@ -40,23 +38,23 @@ const UserController = {
     const { email, password } = req.body;
 
     try {
-      // Find the user by email
-      const user = await User.findOne({ email });
+      // Find the vendor by email
+      const vendor = await Vendor.findOne({ email });
 
-      if (user) {
+      if (vendor) {
         // Compare the entered password with the stored hashed password
-        const passwordMatch = await bcrypt.compare(password, user.password);
+        const passwordMatch = await bcrypt.compare(password, vendor.password);
 
         if (passwordMatch) {
           // Generate a JWT token
-          const token = jwt.sign({ userId: user._id }, 'your_secret_key', { expiresIn: '1h' });
+          const token = jwt.sign({ vendorId: vendor._id }, 'your_secret_key', { expiresIn: '1h' });
 
           res.status(200).json({ token });
         } else {
           res.status(401).json({ message: 'Invalid credentials' });
         }
       } else {
-        res.status(401).json({ message: 'User not found' });
+        res.status(401).json({ message: 'Vendor not found' });
       }
     } catch (error) {
       console.error('Login error:', error);
@@ -90,5 +88,4 @@ const UserController = {
   },
 };
 
-
-module.exports = UserController;
+module.exports = VendorsController;

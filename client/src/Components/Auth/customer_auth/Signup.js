@@ -10,24 +10,23 @@ const Signup = () => {
   //const [error, setError] = useState(null); // Add state for error
   const navigate = useNavigate();
 
-  const handleSignUp = async (e) => {
-    e.preventDefault();
-
-
-    if (email.trim() === '' || password.trim() === '') {
-      // If either email or password is empty, set an error state
-      alert('Please enter both email and password.');
-      return;
-    }
-
-    const success = await AuthService.register(name, email, password);
-
-    if (success) {
-      navigate('/login');
-    } else {
-      alert('Email is already in use. Please use a different email.');
-    }
-  };
+    const handleSignUp = async (e) => {
+      e.preventDefault();
+  
+      if (email.trim() === '' || password.trim() === '') {
+        alert('Please enter both email and password.');
+        return;
+      }
+  
+      const success = await AuthService.register(name, email, password, 'customer');
+  
+      if (success) {
+        // Redirect to the main page and pass the user's name
+        navigate('/main', { state: { username: name } });
+      } else {
+        alert('Email is already in use. Please use a different email.');
+      }
+    };
 
   return (
     <div className="signup-wrapper">
@@ -78,7 +77,7 @@ const Signup = () => {
         </p>
         <br/>
         <p>
-          Are you a vender? <a href="/vlogin" className="signup-link-text">Sign Up</a>
+          Are you a vendor? <a href="/vlogin" className="signup-link-text">Login</a>
         </p>
       </div>
     </div>
