@@ -11,7 +11,7 @@ const SearchPage = () => {
 
   const handleSearch = async () => {
     try {
-      const response = await axios.get(`http://localhost:3001/api/user/search/${searchTerm}`);
+      const response = await axios.get(`https://zerowaste-main.onrender.com/api/user/search/${searchTerm}`);
 
       if (response.status === 200) {
         setSearchResults(response.data);
@@ -25,7 +25,7 @@ const SearchPage = () => {
 
   const handleContainerChange = async (userId, changeAmount) => {
     try {
-      const response = await axios.put(`http://localhost:3001/api/user/update/${userId}`, {
+      const response = await axios.put(`https://zerowaste-main.onrender.com/api/user/update/${userId}`, {
         containers: searchResults.find(result => result._id === userId).containers + changeAmount,
       });
   

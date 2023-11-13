@@ -25,7 +25,7 @@ const MainPage = () => {
     const fetchData = async () => {
       try {
         if (savedEmail) {
-          const response = await axios.get(`http://localhost:3001/api/user/main/${savedEmail}`);
+          const response = await axios.get(`https://zerowaste-main.onrender.com/api/user/main/${savedEmail}`);
           const userData = response.data;
           setUserName(userData.name);
           setUserData(userData);
