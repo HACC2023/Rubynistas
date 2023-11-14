@@ -1,0 +1,54 @@
+.center-container2 {
+  /* Center the content in the container */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.main-wrapper {
+  /* Additional styling for the main content */
+  width: 80%; /* Adjust the width as needed */
+}
+
+.main-title {
+  color: #333;
+  margin-bottom: 3rem;
+}
+
+  .reward-card {
+    border: 1px solid #ddd;
+    padding: 10px;
+    margin: 10px;
+    border-radius: 4px;
+    background-color: #fff;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Optional: Add some spacing between reward cards */
+  .reward-card + .reward-card {
+    margin-top: 20px;
+    margin-bottom: 10px;
+  }
+  
+  .toggle-incentives {
+    color: #007bff;
+    cursor: pointer;
+    margin-top: 10px;
+  }
+  
+  .incentive-list {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .incentive-list li {
+    margin-top: 10px;
+    margin-bottom: 8px;
+    
+  }
+  
+  /* Optional: Add some spacing between reward cards */
+  .reward-card + .reward-card {
+    margin-top: 20px;
+  }
