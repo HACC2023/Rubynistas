@@ -7,6 +7,7 @@ const Vlogin = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false); // New state for loading
+  const [showPassword, setShowPassword] = useState(false); // New state for showing/hiding password
   const navigate = useNavigate();
 
   const handleLogin = async (e) => {
@@ -55,12 +56,18 @@ const Vlogin = () => {
           <br />
           <label className="login-label">
             Password:
-            <input
-              type="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              className="login-input"
-            />
+            <div className="password-input-container">
+              <input
+                type={showPassword ? 'text' : 'password'}
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                className="login-input"
+              />
+              <i
+                className={`password-toggle-icon ${showPassword ? 'fas fa-eye-slash' : 'fas fa-eye'}`}
+                onClick={() => setShowPassword(!showPassword)}
+              />
+            </div>
           </label>
           <br />
           <button type="submit" className="login-button" disabled={loading}>

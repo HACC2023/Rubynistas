@@ -7,6 +7,7 @@ const Vsignup = () => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [showPassword, setShowPassword] = useState(false); // New state for showing/hiding password
   const navigate = useNavigate();
 
   const handleSignUp = async (e) => {
@@ -57,12 +58,18 @@ const Vsignup = () => {
           <br />
           <label className="signup-label">
             Password:
-            <input
-              type="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              className="signup-input"
-            />
+            <div className="password-input-container">
+              <input
+                type={showPassword ? 'text' : 'password'}
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                className="signup-input"
+              />
+              <i
+                className={`password-toggle-icon ${showPassword ? 'fas fa-eye-slash' : 'fas fa-eye'}`}
+                onClick={() => setShowPassword(!showPassword)}
+              />
+            </div>
           </label>
           <br />
           <button type="submit" className="signup-button">

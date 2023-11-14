@@ -12,7 +12,7 @@
   --cardBG: rgb(225, 225, 235);
  }
 
- .vlogi-wrapper {
+ .vlogin-wrapper {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -47,7 +47,7 @@
     border-radius: 4px;
   }
   
-  .vlogi-button {
+  .vlogin-button {
     background-color: var(--PrimaryColor);
     color: white;
     padding: 10px 15px;
@@ -57,7 +57,7 @@
     margin-bottom: 20px;
   }
   
-  .vlogi-button:hover {
+  .vlogin-button:hover {
     background-color: var(--SecondaryColor);
   }
 
@@ -74,4 +74,16 @@
   }
 
   
+  .password-input-container {
+    position: relative;
+  }
+  
+  
+  .password-toggle-icon {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+  }
   
