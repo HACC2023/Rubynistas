@@ -16,14 +16,42 @@
   margin-bottom: 3rem;
 }
 
-  .reward-card {
-    border: 1px solid #ddd;
-    padding: 10px;
-    margin: 10px;
-    border-radius: 4px;
-    background-color: #fff;
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
-  }
+.main-title2 {
+  color: #eae7e7;
+  margin-bottom: 3rem;
+  font-size: large;
+  font-weight: bolder;
+}
+
+.reward-status-card {
+  max-width: 400px; /* Set your desired fixed size */
+  width: 100%; /* Allow the card to take 100% of the width on smaller screens */
+  border: 1px solid #ded9d9;
+  border-radius: 8px;
+  padding: 16px;
+  margin: 16px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+  margin: 0 auto; /* Center the container horizontally */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  background: linear-gradient(to right, #007bff, #00bfff); /* Blue gradient */
+  color: #fff; /* Set text color to white for better visibility */
+}
+
+
+.reward-status-content {
+  text-align: center;
+}
+
+.reward-card {
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 16px;
+  margin: 16px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+}
+
   
   /* Optional: Add some spacing between reward cards */
   .reward-card + .reward-card {
@@ -32,9 +60,8 @@
   }
   
   .toggle-incentives {
-    color: #007bff;
     cursor: pointer;
-    margin-top: 10px;
+    color: #007bff; /* Change color as needed */
   }
   
   .incentive-list {
@@ -52,3 +79,41 @@
   .reward-card + .reward-card {
     margin-top: 20px;
   }
+
+  .points{
+    font-size:xx-large;
+    font-weight: bold;
+    margin-bottom: 5px;
+  
+  }
+
+  .point, .reward-points {
+    margin: 4px 0;
+  }
+
+  .point{
+    font-size:large;
+    margin-top: .5rem;
+    margin-bottom: 5rem;
+    font-weight:bolder;
+
+  }
+
+  .cca{
+    font-size:large;
+    margin-bottom: 6rem;
+
+  }
+
+  .reward-points{
+   font-weight: bold;
+   padding-top: 5rem;
+   
+  }
+
+  /* Media query for smaller screens */
+@media screen and (max-width: 600px) {
+  .reward-status-card {
+    max-width: none; /* Remove the max-width on smaller screens */
+  }
+}

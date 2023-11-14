@@ -2,8 +2,6 @@ import React, { useState, useEffect } from 'react';
 import './MainPage.css'; // Import the CSS file
 import axios from 'axios';
 
-
-
 const MainPage = () => {
   const [containers, setReturnedContainers] = useState(0);
   const [points, setPoints] = useState(0);
@@ -44,14 +42,18 @@ const MainPage = () => {
   return (
     <div className="center-container2">
       <div className="main-wrapper">
-        <h1 className="main-title">Welcome, {name}</h1>
-        <h2 className="main-title">Your Rewards Status</h2>
-        <div>
-          <p>Current Container Amount: {containers}</p>
-          <p>Points: {points}</p>
-          <br />
+        <h1 className="main-title">Welcome, {name}!</h1>
+        <p className="cca">Current Container Amount: {containers}</p>
+
+        <div className="reward-status-card">
+          <h2 className="main-title2">YOUR REWARD STATUS</h2>
+          <div className="reward-status-content">
+            <p className="points">{points}</p>
+            <p className="point">POINTS</p>
+          </div>
         </div>
 
+        <p className="reward-points">POINTS ADD UP TO REWARDS</p>
         <div className="reward-cards-container">
           {rewardCards.map((card, index) => (
             <RewardCard
@@ -68,6 +70,7 @@ const MainPage = () => {
   );
 };
 
+
 const RewardCard = ({ containerCount, reward }) => {
   const incentiveOptions = [
     { points: 25, incentive: '5% discount on next meal' },
@@ -83,6 +86,7 @@ const RewardCard = ({ containerCount, reward }) => {
   };
 
   return (
+
     <div className="reward-card">
       <p> Return {containerCount} Containers</p>
       <p>Get {reward} Points</p>
@@ -95,6 +99,7 @@ const RewardCard = ({ containerCount, reward }) => {
             <li key={index}>{`(${option.points} points) ${option.incentive}`}</li>
           ))}
         </ul>
+        
       )}
     </div>
   );

@@ -10,6 +10,8 @@ const Signup = () => {
   //const [error, setError] = useState(null); // Add state for error
   const navigate = useNavigate();
 
+
+
     const handleSignUp = async (e) => {
       e.preventDefault();
   
@@ -18,7 +20,7 @@ const Signup = () => {
         return;
       }
   
-      const success = await AuthService.register(name, email, password, 'customer');
+      const success = await AuthService.registerUser(name, email, password);
   
       if (success) {
         alert('Account has been successfully created. Please login.');

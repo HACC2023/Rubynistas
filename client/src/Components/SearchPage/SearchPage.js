@@ -6,11 +6,15 @@ import './SearchPage.css';
 const SearchPage = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [searchResults, setSearchResults] = useState([]);
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
 
   const handleSearch = async () => {
     try {
+      // Set loading state to true when starting the search
+      setLoading(true);
+
       const response = await axios.get(`https://zerowaste-main.onrender.com/api/user/search/${searchTerm}`);
 
       if (response.status === 200) {
@@ -20,6 +24,9 @@ const SearchPage = () => {
       }
     } catch (error) {
       console.error('Error fetching search results:', error);
+    } finally {
+      // Reset loading state to false regardless of success or failure
+      setLoading(false);
     }
   };
 
@@ -76,7 +83,7 @@ const SearchPage = () => {
         className="search-input"
       />
       <button onClick={handleSearch} className="search-button">
-        Search
+      {loading ? 'Please wait...' : 'Search'}
       </button>
 
       {searchResults.length > 0 ? (

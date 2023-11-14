@@ -31,10 +31,26 @@ const userSchema = new mongoose.Schema({
   containers: Number,
   points: Number,
   lastCheckout: Date,
+  role: {
+    type: String,
+    default: 'customer',
+  },
 });
 
 const User = mongoose.model('User', userSchema);
 
+
+const vendorSchema = new mongoose.Schema({
+  name: String,
+  email: String,
+  password: String,
+  role: {
+    type: String,
+    default: 'vendor', // Assign the role 'vendor' to identify vendors
+  },
+});
+
+const Vendor = mongoose.model('Vendor', vendorSchema);
 
 
 // Modify the server route
@@ -60,7 +76,7 @@ app.get('/api/user/main/:email', async (req, res) => {
 
 // Register endpoint
 app.post('/api/register', async (req, res) => {
-  const { name, email, password, containers } = req.body;
+  const { name, email, password, containers} = req.body;
 
   // Hash the password (in a real-world scenario, you should use bcrypt)
   const hashedPassword = await bcrypt.hash(password, 10);
@@ -77,6 +93,28 @@ app.post('/api/register', async (req, res) => {
   try {
     await user.save();
     res.status(201).send('User registered successfully.');
+  } catch (error) {
+    res.status(500).send(error.message);
+  }
+});
+
+// Register endpoint for vendors
+app.post('/api/vendor/register', async (req, res) => {
+  const { name, email, password } = req.body;
+
+  // Hash the password (in a real-world scenario, you should use bcrypt)
+  const hashedPassword = await bcrypt.hash(password, 10);
+
+  // Save the vendor to the database using the Vendor model
+  const vendor = new Vendor({
+    name,
+    email,
+    password: hashedPassword,
+  });
+
+  try {
+    await vendor.save();
+    res.status(201).send('Vendor registered successfully.');
   } catch (error) {
     res.status(500).send(error.message);
   }
@@ -105,6 +143,33 @@ app.post('/api/login', async (req, res) => {
     res.status(401).send('User not found.');
   }
 });
+
+// Login endpoint for vendors
+app.post('/api/vendor/login', async (req, res) => {
+  const { email, password } = req.body;
+
+  // Find the vendor by email and role
+  const vendor = await Vendor.findOne({ email, role: 'vendor' });
+
+  if (vendor) {
+    // Compare the entered password with the stored hashed password
+    const passwordMatch = await bcrypt.compare(password, vendor.password);
+
+    if (passwordMatch) {
+      // Generate a JWT token for the vendor
+      const token = jwt.sign({ userId: vendor._id, role: 'vendor' }, 'your_secret_key', {
+        expiresIn: '1h',
+      });
+
+      res.status(200).json({ token });
+    } else {
+      res.status  (401).send('Invalid credentials.');
+    }
+  } else {
+    res.status(401).send('Vendor not found.');
+  }
+});
+
 
 // Logout endpoint
 app.post('/api/logout', (req, res) => {

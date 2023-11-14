@@ -21,7 +21,7 @@ const Vlogin = () => {
     // Set loading state to true when starting login
     setLoading(true);
 
-    const success = await AuthService.login(email, password);
+    const success = await AuthService.vlogin(email, password);
 
     // Reset loading state when login process is complete
     setLoading(false);
@@ -30,7 +30,7 @@ const Vlogin = () => {
       navigate('/search');
     } else {
       // Handle login failure, show an error message, etc.
-      alert('Invalid email or password. Please try again.');
+      alert('Invalid email or password. Please try again. \n CUSTOMERS: please login through customer portal.');
     }
   };
 

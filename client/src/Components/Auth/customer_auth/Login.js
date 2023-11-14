@@ -24,6 +24,7 @@ const Login = () => {
 
     const success = await AuthService.login(email, password);
 
+
     // Reset loading state when login process is complete
     setLoading(false);
 
@@ -34,7 +35,7 @@ const Login = () => {
       navigate('/main');
     } else {
       // Handle login failure, show an error message, etc.
-      alert('Invalid email or password. Please try again.');
+      alert('Invalid email or password. Please try again. \n VENDORS: please login through vendors portal.');
     }
 
     console.log('Error:', error);
