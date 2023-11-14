@@ -10,8 +10,7 @@ import Search from './Components/SearchPage/SearchPage';
 import Footer from './Components/Footer/Footer';
 import Vlogin from './Components/Auth/vendor_auth/Vlogin';
 import Vsignup from './Components/Auth/vendor_auth/Vsignup';
-import About from './Components/About/About';
-import About2 from './Components/About/About2';
+import HomeAbout from './Components/About/HomeAbout';
 import Navbar2 from './Components/MainPage/MainNavbar/Navbar2';
 
 
@@ -27,8 +26,7 @@ function App() {
           <Route path="/vendor" element={<><Navbar /><Vlogin /></>} />
           <Route path="/vlogin" element={<><Navbar /><Vlogin /></>} />
           <Route path="/vsignup" element={<><Navbar /><Vsignup /></>} />
-          <Route path="/about-us" element={<><Navbar /><About /></>} />
-          <Route path="/about-us2" element={<><Navbar /><About2 /></>} />
+          <Route path="/about-us" element={<><Navbar /><HomeAbout /></>} />
           {/* Exclude Navbar / Search on /main route */}
           <Route path="/main" element={<><Navbar2 /><MainPage /></>} />
           <Route path="/search" exact Component={Search} />

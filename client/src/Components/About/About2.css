@@ -1,9 +1,0 @@
-.img-container {
-    display: grid;
-    grid-auto-rows: 1fr;
-    grid-template-columns: 1fr 1fr 1fr;
-}
-
-.img-container > * {
-    padding:1rem;
-} 
