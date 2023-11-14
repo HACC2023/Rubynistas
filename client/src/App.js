@@ -10,7 +10,7 @@ import Search from './Components/SearchPage/SearchPage';
 import Footer from './Components/Footer/Footer';
 import Vlogin from './Components/Auth/vendor_auth/Vlogin';
 import Vsignup from './Components/Auth/vendor_auth/Vsignup';
-import About from './Components/About/About2';
+import About from './Components/About/About';
 import About2 from './Components/About/About2';
 import Navbar2 from './Components/MainPage/MainNavbar/Navbar2';
 

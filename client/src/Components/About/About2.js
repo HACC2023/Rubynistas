@@ -2,6 +2,7 @@ import React from 'react';
 import '../../App.css';
 import './About2.css';
 import one from '../About/1.png';
+import '../Assets/images';
 
 function About2() {
     return (
