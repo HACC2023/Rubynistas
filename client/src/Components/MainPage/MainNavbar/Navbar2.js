@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import {Link} from 'react-router-dom';
 import './navbar2.css';
-import {GiWaveSurfer} from 'react-icons/gi';
 import { useNavigate } from 'react-router-dom';
 //import {Button} from '../Buttons/Button';
 
@@ -52,7 +51,7 @@ function Navbar2() {
     <nav className='navbar2'>
         <div className='navbar2-container'>
             <Link to='/' className='navbar2-logo' onClick={closeMobileMenu}>
-            <GiWaveSurfer/> Zero Waste 
+            Zero Waste 
             </Link>
             <div className='menu-icon' onClick={handleClick}>
             <i className={click ? 'fa-regular fa-circle-xmark' : 'fas fa-bars'} onClick={handleClick}></i>

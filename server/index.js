@@ -6,9 +6,9 @@ const cors = require('cors');
 const userRoutes = require('./Routes/userRoutes'); // Your route file
 const sendPaymentEmail = require('./sendPaymentEmail'); 
 
-
 const app = express();
 const PORT = 3001;
+
 
 app.use(cors());
 app.use(express.json());
@@ -23,7 +23,6 @@ const sgMail = require('@sendgrid/mail');
 sgMail.setApiKey('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');
 
 
-// Define user schema and model
 const userSchema = new mongoose.Schema({
   name: String,
   email: String,
@@ -279,6 +278,31 @@ app.post('/api/send-email/:userId', async (req, res) => {
   }
 });
 
+// Redeem points endpoint
+app.post('/api/redeem-points', async (req, res) => {
+  const { userEmail, pointsToRedeem } = req.body;
+
+  try {
+    // Find the user by email and update the points
+    const user = await User.findOne({ email: userEmail });
+
+    if (user) {
+      user.points -= pointsToRedeem;
+      await user.save();
+
+      // Respond with the updated user data
+      res.status(200).json(user);
+    } else {
+      res.status(404).send('User not found.');
+    }
+  } catch (error) {
+    console.error('Error redeeming points:', error);
+    res.status(500).send('Error redeeming points.');
+  }
+});;
+
+
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });
+

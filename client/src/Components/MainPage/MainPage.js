@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import './MainPage.css'; // Import the CSS file
+import AuthService from '../Auth/server_auth/AuthService';
+import './MainPage.css';
 import axios from 'axios';
 
 const MainPage = () => {
@@ -16,7 +17,6 @@ const MainPage = () => {
   ];
 
   useEffect(() => {
-    // Retrieve the email from local storage
     const savedEmail = localStorage.getItem('userEmail');
     setUserEmail(savedEmail);
 
@@ -34,16 +34,41 @@ const MainPage = () => {
         console.error('Error fetching user data:', error);
       }
     };
-  
+
     fetchData();
   }, []);
+
+  const redeemPoints = async (reward) => {
+    try {
+      if (points >= reward.reward) {
+        const newPoints = points - reward.reward;
+        setPoints(newPoints);
   
+        // Update points directly in the database
+        if (userEmail) {
+          await axios.post('http://localhost:3001/api/redeem-points', {
+            userEmail: userEmail,
+            pointsToRedeem: reward.reward,
+          });
+  
+          // Assuming the server responds with updated user data, you can set it in the state
+          const updatedUserData = await axios.get(`https://zerowaste-main.onrender.com/api/user/main/${userEmail}`);
+          setUserData(updatedUserData.data);
+        }
+
+      } else {
+        console.log("Not enough points to redeem this reward!");
+      }
+    } catch (error) {
+      console.error('Error redeeming points:', error);
+    }
+  };
+
 
   return (
     <div className="center-container2">
       <div className="main-wrapper">
         <h1 className="main-title">Welcome, {name}!</h1>
-        <p className="cca">Current Container Amount: {containers}</p>
 
         <div className="reward-status-card">
           <h2 className="main-title2">YOUR REWARD STATUS</h2>
@@ -52,8 +77,9 @@ const MainPage = () => {
             <p className="point">POINTS</p>
           </div>
         </div>
+        <p className="cca">CURRENT CONTAINER AMOUNT: {containers}</p>
 
-<p className="reward-points">POINTS ADD UP TO REWARDS</p>
+        <p className="reward-points">POINTS ADD UP TO REWARDS</p>
         <div className="reward-cards-container">
           {rewardCards.map((card, index) => (
             <RewardCard
@@ -62,6 +88,7 @@ const MainPage = () => {
               reward={card.reward}
               userData={userData}
               incentiveOptions={getIncentiveOptionsForCard(card)}
+              onRedeem={() => redeemPoints(card)}
             />
           ))}
         </div>
@@ -71,9 +98,7 @@ const MainPage = () => {
   );
 };
 
-
-
-const RewardCard = ({ containerCount, reward, userData, incentiveOptions }) => {
+const RewardCard = ({ containerCount, reward, userData, incentiveOptions, onRedeem }) => {
   const [showIncentives, setShowIncentives] = useState(false);
 
   const handleToggleIncentives = () => {
@@ -84,6 +109,7 @@ const RewardCard = ({ containerCount, reward, userData, incentiveOptions }) => {
     <div className="reward-card">
       <p> Return {containerCount} Containers</p>
       <p>Get {reward} Points</p>
+      <button onClick={onRedeem}>Redeem</button>
       <p onClick={handleToggleIncentives} className="toggle-incentives">
         {showIncentives ? 'Hide Incentives' : 'Show Incentives'}
       </p>
@@ -98,10 +124,7 @@ const RewardCard = ({ containerCount, reward, userData, incentiveOptions }) => {
   );
 };
 
-// Helper function to get incentive options based on the reward card
 const getIncentiveOptionsForCard = (rewardCard) => {
-  // You can customize this function based on your logic
-  // For example, you can return different incentive options based on the rewardCard properties
   if (rewardCard.reward === 5) {
     return [
       { points: 10, incentive: '5% discount on next meal' },
@@ -115,7 +138,6 @@ const getIncentiveOptionsForCard = (rewardCard) => {
       { points: 30, incentive: 'Free dessert with your next meal' },
     ];
   } else {
-    // Default case or additional logic
     return [
       { points: 15, incentive: 'Free appetizer with your next purchase' },
       { points: 30, incentive: '20% off your entire order' },
@@ -125,4 +147,5 @@ const getIncentiveOptionsForCard = (rewardCard) => {
 };
 
 export default MainPage;
+
 

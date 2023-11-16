@@ -85,8 +85,6 @@ const vlogin = async (email, password) => {
   }
 };
 
-
-
 const AuthService = {
   
   registerVendor,
@@ -127,23 +125,30 @@ const AuthService = {
   isAuthenticated: () => {
     const token = localStorage.getItem('token');
     return token !== null;
-  }};
-/*
-getRole: async (email) => {
-  try {
-    const response = await axios.get(`${API_URL}/user/role`, {
-      params: { email }, // Send email as a query parameter
-    });
-    return response.data.role; // Assuming the server returns the user's role
-  } catch (error) {
-    console.error(error);
-    throw new Error('Failed to retrieve user role');
-  }
-  */
+  },
+  
+  redeemPoints: async (userId, pointsToRedeem) => {
+    try {
+      const token = AuthService.getToken();
+      const response = await axios.post(
+        `${API_URL}/redeem-points/${userId}`,
+        { pointsToRedeem },
+        { headers: { Authorization: `Bearer ${token}` } }
+      );
 
-
-
-
+      if (response.ok) {
+        return true;
+      } else {
+        const data = response.data;
+        throw new Error(data.message || 'Points redemption failed.');
+      }
+    } catch (error) {
+      console.error('Error redeeming points:', error);
+      return false;
+    }
+  },
+  
+};
 
 export default AuthService;
 

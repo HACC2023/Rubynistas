@@ -9,6 +9,7 @@
 .main-wrapper {
   /* Additional styling for the main content */
   width: 80%; /* Adjust the width as needed */
+  position: relative; /* Add position relative to create a stacking context */
 }
 
 .main-title {
@@ -36,8 +37,9 @@
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   background: linear-gradient(to right, #007bff, #00bfff); /* Blue gradient */
   color: #fff; /* Set text color to white for better visibility */
+  position: relative; /* Add position relative to create a stacking context */
+  z-index: 1; /* Set a higher z-index to keep it on top */
 }
-
 
 .reward-status-content {
   text-align: center;
@@ -52,69 +54,60 @@
   background-color: #fff;
 }
 
-  
-  /* Optional: Add some spacing between reward cards */
-  .reward-card + .reward-card + .reward-card {
-    margin-top: 20px;
-    margin-bottom: 10rem;
+.toggle-incentives {
+  cursor: pointer;
+  color: #007bff; /* Change color as needed */
+}
 
-  }
-  
-  .toggle-incentives {
-    cursor: pointer;
-    color: #007bff; /* Change color as needed */
-  }
-  
-  .incentive-list {
-    list-style-type: none;
-    padding: 0;
-  }
-  
-  .incentive-list li {
-    margin-top: 10px;
-    margin-bottom: 8px;
-    
-  }
-  
-  /* Optional: Add some spacing between reward cards */
-  .reward-card + .reward-card {
-    margin-top: 20px;
-  }
+.incentive-list {
+  list-style-type: none;
+  padding: 0;
+}
 
-  .points{
-    font-size:xx-large;
-    font-weight: bold;
-    margin-bottom: 5px;
-  
-  }
+.incentive-list li {
+  margin-top: 10px;
+  margin-bottom: 8px;
+}
 
-  .point, .reward-points {
-    margin: 4px 0;
-  }
+.point,
+.reward-points {
+  margin: 4px 0;
+}
 
-  .point{
-    font-size:large;
-    margin-top: .5rem;
-    margin-bottom: 5rem;
-    font-weight:bolder;
+.points {
+  font-size: xx-large;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
 
-  }
+.point {
+  font-size: large;
+  margin-top: 0.5rem;
+  margin-bottom: 5rem;
+  font-weight: bolder;
+}
 
-  .cca{
-    font-size:large;
-    margin-bottom: 6rem;
+.cca {
+  font-size: large;
+  font-weight: bold;
+  text-align: center;
+  margin-top: 2rem;
+}
 
-  }
+.reward-points {
+  font-weight: bold;
+  padding-top: 6rem;
+}
 
-  .reward-points{
-   font-weight: bold;
-   padding-top: 5rem;
-   
-  }
-
-  /* Media query for smaller screens */
+/* Media query for smaller screens */
 @media screen and (max-width: 600px) {
   .reward-status-card {
     max-width: none; /* Remove the max-width on smaller screens */
   }
+
+  .center-container2{
+    margin-bottom: 4rem;
+  }
+
 }
+
