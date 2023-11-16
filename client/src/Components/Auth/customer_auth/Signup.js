@@ -35,7 +35,7 @@ const Signup = () => {
     return (
       <div className="signup-wrapper">
         <div className="signup-container">
-          <h1> VENDORS </h1>
+          <h1> CUSTOMERS </h1>
           <br />
           <br />
           <h2 className="signup-heading">Sign Up</h2>
@@ -83,7 +83,7 @@ const Signup = () => {
           <div className="signup-link">
             <p>
               Already have an account?{' '}
-              <a href="/vlogin" className="signup-link-text">
+              <a href="/login" className="signup-link-text">
                 Login
               </a>
             </p>

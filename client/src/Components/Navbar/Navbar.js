@@ -30,7 +30,7 @@ function Navbar() {
     <nav className='navbar'>
         <div className='navbar-container'>
             <Link to='/' className='navbar-logo' onClick={closeMobileMenu}>
-            <GiWaveSurfer/> Zero Waste 
+            Zero Waste 
             </Link>
             <div className='menu-icon' onClick={handleClick}>
             <i className={click ? 'fa-regular fa-circle-xmark' : 'fas fa-bars'} onClick={handleClick}></i>

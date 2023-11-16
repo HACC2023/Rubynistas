@@ -53,7 +53,7 @@ const MainPage = () => {
           </div>
         </div>
 
-        <p className="reward-points">POINTS ADD UP TO REWARDS</p>
+<p className="reward-points">POINTS ADD UP TO REWARDS</p>
         <div className="reward-cards-container">
           {rewardCards.map((card, index) => (
             <RewardCard
@@ -61,6 +61,7 @@ const MainPage = () => {
               containerCount={card.containerCount}
               reward={card.reward}
               userData={userData}
+              incentiveOptions={getIncentiveOptionsForCard(card)}
             />
           ))}
         </div>
@@ -71,14 +72,8 @@ const MainPage = () => {
 };
 
 
-const RewardCard = ({ containerCount, reward }) => {
-  const incentiveOptions = [
-    { points: 25, incentive: '5% discount on next meal' },
-    { points: 50, incentive: 'Free drink with your next purchase' },
-    { points: 100, incentive: '10% off your entire order' },
-    // Add more incentive options as needed
-  ];
 
+const RewardCard = ({ containerCount, reward, userData, incentiveOptions }) => {
   const [showIncentives, setShowIncentives] = useState(false);
 
   const handleToggleIncentives = () => {
@@ -86,7 +81,6 @@ const RewardCard = ({ containerCount, reward }) => {
   };
 
   return (
-
     <div className="reward-card">
       <p> Return {containerCount} Containers</p>
       <p>Get {reward} Points</p>
@@ -99,10 +93,35 @@ const RewardCard = ({ containerCount, reward }) => {
             <li key={index}>{`(${option.points} points) ${option.incentive}`}</li>
           ))}
         </ul>
-        
       )}
     </div>
   );
+};
+
+// Helper function to get incentive options based on the reward card
+const getIncentiveOptionsForCard = (rewardCard) => {
+  // You can customize this function based on your logic
+  // For example, you can return different incentive options based on the rewardCard properties
+  if (rewardCard.reward === 5) {
+    return [
+      { points: 10, incentive: '5% discount on next meal' },
+      { points: 15, incentive: 'Free drink with your next purchase' },
+      { points: 20, incentive: 'Free drink with your next purchase' },
+    ];
+  } else if (rewardCard.reward === 10) {
+    return [
+      { points: 10, incentive: '10% off your entire order' },
+      { points: 20, incentive: 'Free dessert with your next meal' },
+      { points: 30, incentive: 'Free dessert with your next meal' },
+    ];
+  } else {
+    // Default case or additional logic
+    return [
+      { points: 15, incentive: 'Free appetizer with your next purchase' },
+      { points: 30, incentive: '20% off your entire order' },
+      { points: 45, incentive: '20% off your entire order' },
+    ];
+  }
 };
 
 export default MainPage;

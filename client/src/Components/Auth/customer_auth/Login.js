@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import AuthService from '../server_auth/AuthService';
+import { Link } from 'react-router-dom';
 import './Login.css';
 
 const Login = () => {
@@ -83,11 +84,11 @@ const Login = () => {
         </form>
         <div className="signup-link">
           <p>
-            Don't have an account? <a href="/signup" className="signup-link-text">Sign Up</a>
+            Don't have an account? <Link to="/signup" className="signup-link-text">Sign Up</Link>
           </p>
           <br />
           <p>
-            Are you a vendor? <a href="/vlogin" className="signup-link-text">Login</a>
+            Are you a vendor? <Link to="/vlogin" className="signup-link-text">Login</Link>
           </p>
         </div>
       </div>

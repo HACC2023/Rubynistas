@@ -10,31 +10,31 @@ import Search from './Components/SearchPage/SearchPage';
 import Footer from './Components/Footer/Footer';
 import Vlogin from './Components/Auth/vendor_auth/Vlogin';
 import Vsignup from './Components/Auth/vendor_auth/Vsignup';
-import About from './Components/About/About';
+import HomeAbout from './Components/About/HomeAbout';
 import Navbar2 from './Components/MainPage/MainNavbar/Navbar2';
 
 
 
 function App() {
   return (
-    <>
-      <Router>
-        <Routes>
-          <Route path='/' element={<><Navbar /><Home /></>} />
-          <Route path="/login" element={<><Navbar /><Login /></>} />
-          <Route path="/signup" element={<><Navbar /><Signup /></>} />
-          <Route path="/vendor" element={<><Navbar /><Vlogin /></>} />
-          <Route path="/vlogin" element={<><Navbar /><Vlogin /></>} />
-          <Route path="/vsignup" element={<><Navbar /><Vsignup /></>} />
-          {/* Exclude Navbar / Search on /main route */}
-          <Route path="/main" element={<><Navbar2 /><MainPage /></>} />
-          <Route path="/search" exact Component={Search} />
-          <Route path="/about-us" exact Component={About} />
-        </Routes>
-        <Footer />
-      </Router>
-    </>
-  );
-}
+      <>
+        <Router>
+          <Routes>
+            <Route path='/' element={<><Navbar /><Home /></>} />
+            <Route path="/login" element={<><Navbar /><Login /></>} />
+            <Route path="/signup" element={<><Navbar /><Signup /></>} />
+            <Route path="/vendor" element={<><Navbar /><Vlogin /></>} />
+            <Route path="/vlogin" element={<><Navbar /><Vlogin /></>} />
+            <Route path="/vsignup" element={<><Navbar /><Vsignup /></>} />
+            <Route path="/main" element={<><Navbar2 /><MainPage /></>} />
+            <Route path="/about-us" element={<><Navbar /><HomeAbout /></>} />
+            {/* Corrected Route for "/search" */}
+            <Route path="/search" element={<Search />} />
+          </Routes>
+          <Footer />
+        </Router>
+      </>
+    );
+  }
 
 export default App;
