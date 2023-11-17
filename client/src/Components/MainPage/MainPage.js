@@ -22,7 +22,7 @@ const MainPage = () => {
     const fetchData = async () => {
       try {
         if (savedEmail) {
-          const response = await axios.get(`https://zerowaste-main.onrender.com/api/user/main/${savedEmail}`);
+          const response = await axios.get(`https://zerowaste-newver.onrender.com/api/user/main/${savedEmail}`);
           const userData = response.data;
           setUserName(userData.name);
           setUserData(userData);
@@ -45,13 +45,13 @@ const MainPage = () => {
   
         // Update points directly in the database
         if (userEmail) {
-          await axios.post('https://zerowaste-main.onrender.com/api/user/api/main/${redeem-points}', {
+          await axios.post('https://zerowaste-newver.onrender.com/api/redeem-points', {
             userEmail: userEmail,
             pointsToRedeem: reward.reward,
           });
   
           // Assuming the server responds with updated user data, you can set it in the state
-          const updatedUserData = await axios.get(`https://zerowaste-main.onrender.com/api/user/main/${userEmail}`);
+          const updatedUserData = await axios.get(`https://zerowaste-newver.onrender.com/api/user/main/${userEmail}`);
           setUserData(updatedUserData.data);
         }
 

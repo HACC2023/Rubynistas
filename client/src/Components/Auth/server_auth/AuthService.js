@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_URL = 'https://zerowaste-main.onrender.com/api';
+const API_URL = 'https://zerowaste-newver.onrender.com/api';
 
 // vendor register role
 const registerVendor = async (name, email, password) => {
