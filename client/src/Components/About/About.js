@@ -1,7 +1,6 @@
 import React from "react";
 import "../../App.css";
 import "./About.css";
-import CardItem from "../Containers/CardItem";
 import AboutItem from "./AboutItem";
 
 function About() {

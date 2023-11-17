@@ -5,7 +5,7 @@ const API_URL = 'https://zerowaste-newver.onrender.com/api';
 // vendor register role
 const registerVendor = async (name, email, password) => {
   try {
-    const response = await fetch('http://localhost:3001/api/vendor/register', {
+    const response = await fetch('https://zerowaste-newver.onrender.com/api/vendor/register', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -32,7 +32,7 @@ const registerVendor = async (name, email, password) => {
 // user register role
 const registerUser = async (name, email, password) => {
   try {
-    const response = await fetch('http://localhost:3001/api/register', {
+    const response = await fetch('https://zerowaste-newver.onrender.com/api/register', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -59,7 +59,7 @@ const registerUser = async (name, email, password) => {
 // vendor login
 const vlogin = async (email, password) => {
   try {
-    const response = await fetch('http://localhost:3001/api/vendor/login', {
+    const response = await fetch('https://zerowaste-newver.onrender.com/api/vendor/login', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

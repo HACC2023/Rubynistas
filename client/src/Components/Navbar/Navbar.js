@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import {Link} from 'react-router-dom';
 import './navbar.css';
-import {GiWaveSurfer} from 'react-icons/gi';
 //import {Button} from '../Buttons/Button';
 
 function Navbar() {
