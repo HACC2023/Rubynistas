@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import AuthService from '../Auth/server_auth/AuthService';
 import './MainPage.css';
 import axios from 'axios';
 
@@ -11,9 +10,9 @@ const MainPage = () => {
   const [name, setUserName] = useState('');
 
   const rewardCards = [
-    { containerCount: 1, reward: 5 },
-    { containerCount: 5, reward: 10 },
-    { containerCount: 10, reward: 15 },
+    { containerCount: 1, reward: 15 },
+    { containerCount: 5, reward: 30 },
+    { containerCount: 10, reward: 50 },
   ];
 
   useEffect(() => {
@@ -46,7 +45,7 @@ const MainPage = () => {
   
         // Update points directly in the database
         if (userEmail) {
-          await axios.post('http://localhost:3001/api/redeem-points', {
+          await axios.post('https://zerowaste-main.onrender.com/api/user/api/main/${redeem-points}', {
             userEmail: userEmail,
             pointsToRedeem: reward.reward,
           });
@@ -57,7 +56,7 @@ const MainPage = () => {
         }
 
       } else {
-        console.log("Not enough points to redeem this reward!");
+        alert("Not enough points to redeem this reward!");
       }
     } catch (error) {
       console.error('Error redeeming points:', error);
@@ -107,8 +106,10 @@ const RewardCard = ({ containerCount, reward, userData, incentiveOptions, onRede
 
   return (
     <div className="reward-card">
-      <p> Return {containerCount} Containers</p>
-      <p>Get {reward} Points</p>
+    <div className="rewards-titles">
+      <p> Have more than {reward} Points?</p>
+      <p className="receive-title"> Receive the following: </p>
+      </div>
       <button onClick={onRedeem}>Redeem</button>
       <p onClick={handleToggleIncentives} className="toggle-incentives">
         {showIncentives ? 'Hide Incentives' : 'Show Incentives'}
@@ -125,23 +126,23 @@ const RewardCard = ({ containerCount, reward, userData, incentiveOptions, onRede
 };
 
 const getIncentiveOptionsForCard = (rewardCard) => {
-  if (rewardCard.reward === 5) {
+  if (rewardCard.reward === 15) {
     return [
-      { points: 10, incentive: '5% discount on next meal' },
-      { points: 15, incentive: 'Free drink with your next purchase' },
+      { points: 15, incentive: '5% discount on next meal' },
       { points: 20, incentive: 'Free drink with your next purchase' },
+      { points: 25, incentive: 'Free drink with your next purchase' },
     ];
-  } else if (rewardCard.reward === 10) {
+  } else if (rewardCard.reward === 30) {
     return [
-      { points: 10, incentive: '10% off your entire order' },
-      { points: 20, incentive: 'Free dessert with your next meal' },
-      { points: 30, incentive: 'Free dessert with your next meal' },
+      { points: 30, incentive: '10% off your entire order' },
+      { points: 35, incentive: 'Free dessert with your next meal' },
+      { points: 40, incentive: 'Free dessert with your next meal' },
     ];
   } else {
     return [
-      { points: 15, incentive: 'Free appetizer with your next purchase' },
-      { points: 30, incentive: '20% off your entire order' },
-      { points: 45, incentive: '20% off your entire order' },
+      { points: 50, incentive: 'Free appetizer with your next purchase' },
+      { points: 60, incentive: '20% off your entire order' },
+      { points: 70, incentive: '20% off your entire order' },
     ];
   }
 };

@@ -3,7 +3,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  height: 110vh;
 }
 
 .main-wrapper {
@@ -14,6 +14,7 @@
 
 .main-title {
   color: #333;
+  margin-top: 3rem;
   margin-bottom: 3rem;
 }
 
@@ -57,6 +58,7 @@
 .toggle-incentives {
   cursor: pointer;
   color: #007bff; /* Change color as needed */
+  margin-top: 10px;
 }
 
 .incentive-list {
@@ -97,6 +99,15 @@
 .reward-points {
   font-weight: bold;
   padding-top: 6rem;
+}
+
+.rewards-titles{
+  margin-bottom: 10px;
+}
+
+.receive-title{
+  margin-top: 5px;
+  font-weight: bold;
 }
 
 /* Media query for smaller screens */

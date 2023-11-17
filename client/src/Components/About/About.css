@@ -111,7 +111,7 @@
 } 
 
 .info-container {
-  padding: 5%;
+  padding: 2%;
   background: #1b6596;
   margin: 0 auto; /* Center the container horizontally */
   display: flex;
@@ -131,10 +131,11 @@
   float: left;
   height: 100px;
   font-size: large;
+  width: 100ch;
 }
 
 .info-container > p {
-  width: 100ch; /* Adjusted to use percentage */
+  width: 80ch; /* Adjusted to use percentage */
   margin: auto; /* Center-align the paragraph text */
 }
 

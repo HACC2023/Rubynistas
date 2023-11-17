@@ -37,7 +37,7 @@
 
 .navbar-logo {
   color: #fff;
-  justify-self: start;
+  justify-self: flex-start;
   margin-left: 20px;
   cursor: pointer;
   text-decoration: none;
@@ -58,7 +58,7 @@
   list-style: none;
   text-align: center;
   width: 55vw;
-  justify-content: end;
+  justify-content: flex-end;
   margin-right: 2rem;
 }
 
