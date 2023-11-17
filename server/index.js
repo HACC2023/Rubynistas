@@ -299,7 +299,7 @@ app.post('/api/redeem-points', async (req, res) => {
     console.error('Error redeeming points:', error);
     res.status(500).send('Error redeeming points.');
   }
-});;
+});
 
 
 app.listen(PORT, () => {
