@@ -5,7 +5,7 @@ const API_URL = 'https://zerowaste-newver.onrender.com/api';
 // vendor register role
 const registerVendor = async (name, email, password) => {
   try {
-    const response = await fetch('https://zerowaste-newver.onrender.com/api/vendor/register', {
+    const response = await fetch(`${API_URL}/vendor/register`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -32,7 +32,7 @@ const registerVendor = async (name, email, password) => {
 // user register role
 const registerUser = async (name, email, password) => {
   try {
-    const response = await fetch('https://zerowaste-newver.onrender.com/api/register', {
+    const response = await fetch(`${API_URL}/register`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -59,7 +59,7 @@ const registerUser = async (name, email, password) => {
 // vendor login
 const vlogin = async (email, password) => {
   try {
-    const response = await fetch('https://zerowaste-newver.onrender.com/api/vendor/login', {
+    const response = await fetch(`${API_URL}/vendor/login`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -86,7 +86,6 @@ const vlogin = async (email, password) => {
 };
 
 const AuthService = {
-  
   registerVendor,
   registerUser,
   vlogin,
@@ -126,7 +125,7 @@ const AuthService = {
     const token = localStorage.getItem('token');
     return token !== null;
   },
-  
+
   redeemPoints: async (userId, pointsToRedeem) => {
     try {
       const token = AuthService.getToken();
@@ -147,8 +146,8 @@ const AuthService = {
       return false;
     }
   },
-  
 };
 
 export default AuthService;
+
 
