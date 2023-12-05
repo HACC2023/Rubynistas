@@ -57,6 +57,16 @@ function Navbar2() {
             <i className={click ? 'fa-regular fa-circle-xmark' : 'fas fa-bars'} onClick={handleClick}></i>
             </div>
             <ul className={click ? 'nav-menu2 active': 'nav-menu2'}>
+            <li className='nav-item2'>
+                <Link to='/main' className='nav-links2' onClick={closeMobileMenu}>
+                  Home
+                </Link>
+              </li>
+            <li className='nav-item2'>
+                <Link to='/home-credit-card' className='nav-links2' onClick={closeMobileMenu}>
+                  Card
+                </Link>
+              </li>
               <li className='nav-item2'>
                 <Link to='/account' className='nav-links2' onClick={closeMobileMenu}>
                   Account

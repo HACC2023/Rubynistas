@@ -15,9 +15,8 @@ function Footer() {
           </div>
           <div class='footer-link-items'>
             <h2>About Us</h2>
-            <Link to='/sign-up'>How it works</Link>
+            <a href='https://www.fullcycletakeouthawaii.org/'>How it works</a>
             <Link to='/'>Testimonials</Link>
-            <Link to='/'>Careers</Link>
             <Link to='/'>Investors</Link>
             <Link to='/'>Terms of Service</Link>
           </div>

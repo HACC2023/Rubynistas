@@ -88,6 +88,31 @@ const UserController = {
       res.status(500).json({ message: 'Internal server error' });
     }
   },
+
+  getAccountInfo: async (req, res) => {
+    const { email } = req.params;
+
+    try {
+      // Find the user by email
+      const user = await User.findOne({ email });
+
+      if (user) {
+        res.status(200).json({
+          name: user.name,
+          email: user.email,
+          containers: user.containers,
+          points: user.points,
+          // Add other user information as needed
+        });
+      } else {
+        res.status(404).json({ message: 'User not found' });
+      }
+    } catch (error) {
+      console.error('Fetch user information error:', error);
+      res.status(500).json({ message: 'Internal server error' });
+    }
+  },
+
 };
 
 

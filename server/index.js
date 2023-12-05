@@ -71,6 +71,22 @@ app.get('/api/user/main/:email', async (req, res) => {
   }
 });
 
+app.get('/api/user/main/:email', async (req, res) => {
+  const { email } = req.params;
+
+  try {
+    const userData = await User.findOne({ email });
+
+    if (userData) {
+      res.status(200).json(userData);
+    } else {
+      res.status(404).send('User not found.');
+    }
+  } catch (error) {
+    console.error('Error fetching user data:', error);
+    res.status(500).send('Error fetching user data.');
+  }
+});
 
 
 // Register endpoint

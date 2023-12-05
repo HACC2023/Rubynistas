@@ -1,0 +1,109 @@
+.card {
+  text-align: center;
+}
+
+.card-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .card-logo {
+      animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.card-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.card-link {
+  color: #61dafb;
+}
+
+@keyframes card-logo-spin {
+  from {
+      transform: rotate(0deg);
+  }
+  to {
+      transform: rotate(360deg);
+  }
+}
+
+.card {
+  width: 400px;
+  margin: auto;
+  padding: 20px;
+  background-color: #f4f4f4;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+form {
+  margin-top: 20px;
+}
+
+input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  box-sizing: border-box;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+/* Style for the card image and details */
+.react-credit-card__card {
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+/* Style for the card input fields */
+.react-credit-card__inputs {
+  display: flex;
+  justify-content: space-between;
+}
+
+/* Style for the card input labels */
+.react-credit-card__input label {
+  font-size: 14px;
+  color: #333;
+  margin-bottom: 5px;
+  display: block;
+}
+
+/* Style for the submit button */
+button {
+  background-color: #4caf50;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 10px;
+  margin: 20px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+button:hover {
+  background-color: #45a049;
+}
+
+/* Style for the container of the "Your Card" section */
+.card-container {
+  margin-top: 20px;
+  text-align: center;
+}
+
+/* Style for the heading in the "Your Card" section */
+.card-heading {
+  padding: 10px;
+  padding-top: 60px;
+}
