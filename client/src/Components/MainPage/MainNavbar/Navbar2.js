@@ -67,16 +67,6 @@ function Navbar2() {
                   Card
                 </Link>
               </li>
-              <li className='nav-item2'>
-                <Link to='/account' className='nav-links2' onClick={closeMobileMenu}>
-                  Account
-                </Link>
-              </li>
-              <li className='nav-item2'>
-                <Link to='/locations' className='nav-links2' onClick={closeMobileMenu}>
-                  Locations
-                </Link>
-              </li>
               <li className='nav-item'>
                 <Link to='/login' className='nav-links-mobile' onClick={closeMobileMenu}>
                   Logout
