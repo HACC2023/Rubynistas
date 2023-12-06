@@ -78,10 +78,6 @@ const UserController = {
       // Verify the token
       jwt.verify(token, 'your_secret_key');
 
-      // If verification is successful, the token is valid
-      // You can add additional logic here, such as blacklisting the token
-      // or removing it from the client-side storage
-
       res.status(200).json({ message: 'Logout successful' });
     } catch (error) {
       console.error('Logout error:', error);
