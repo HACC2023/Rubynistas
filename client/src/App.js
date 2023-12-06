@@ -13,10 +13,6 @@ import Vsignup from './Components/Auth/vendor_auth/Vsignup';
 import HomeAbout from './Components/About/HomeAbout';
 import Navbar2 from './Components/MainPage/MainNavbar/Navbar2';
 import HomeCreditCard from './Components/CreditCard/HomeCreditCard';
-import AccountPage from './Components/Account/AccountPage';
-
-
-
 
 
 
@@ -34,7 +30,6 @@ function App() {
             <Route path="/main" element={<><Navbar2 /><MainPage /></>} />
             <Route path="/about-us" element={<><Navbar /><HomeAbout /></>} />
             <Route path="/home-credit-card" element={<><Navbar2 /><HomeCreditCard /></>} />
-            <Route path="/account" element={<><Navbar2 /><AccountPage /></>} />
             {/* Corrected Route for "/search" */}
             <Route path="/search" element={<Search />} />
           </Routes>
